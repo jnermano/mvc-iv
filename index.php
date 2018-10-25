@@ -35,19 +35,28 @@ if($path_split === '/'){
         $ctrl_obj = new $controller_name(new $model_name());
 
         if(isset($parameters[0])){
-            $params = $parameters[0];
+            
+                $params = $parameters[0];
+            
         }else{
             $params = null;
         }
 
         if ($method_name != '') {
-            $ctrl_obj->$method_name($params);
+
+            if(method_exists($ctrl_obj, $method_name)){
+                $ctrl_obj->$method_name($params);
+            }else{
+                header('HTTP/1.1 404 Not Found');
+                die('404 - The action - <b>'.$method_name.'</b> in <b>'. $controller_name .'</b> - not found');
+            }
+
         }else{
             $ctrl_obj->index();
         }
         //echo json_encode($value);
     }else{
         header('HTTP/1.1 404 Not Found');
-        die('404 - The file - '.$controller_name.' - not found');
+        die('404 - The file - '.$file_name.' - not found');
     }
 }
