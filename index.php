@@ -35,9 +35,7 @@ if($path_split === '/'){
         $ctrl_obj = new $controller_name(new $model_name());
 
         if(isset($parameters[0])){
-            
                 $params = $parameters[0];
-            
         }else{
             $params = null;
         }
