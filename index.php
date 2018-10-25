@@ -41,14 +41,12 @@ if($path_split === '/'){
         }
 
         if ($method_name != '') {
-
             if(method_exists($ctrl_obj, $method_name)){
                 $ctrl_obj->$method_name($params);
             }else{
                 header('HTTP/1.1 404 Not Found');
                 die('404 - The action - <b>'.$method_name.'</b> in <b>'. $controller_name .'</b> - not found');
             }
-
         }else{
             $ctrl_obj->index();
         }
